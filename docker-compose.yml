@@ -1,0 +1,31 @@
+version: "3.4"
+
+networks:
+  docker-test:
+    driver: bridge
+
+services:
+  test1:
+    build:
+      context: ./
+      dockerfile: DockerFile.test1
+    ports:
+      - "8080:80"
+    volumes:
+    - static-content:/test-docker/static/
+    networks:
+      - docker-test
+
+  test2:
+    build:
+      context: ./
+      dockerfile: DockerFile.test2
+    ports:
+      - "8081:80"
+    volumes:
+    - static-content:/test-docker/static/
+    networks:
+      - docker-test
+
+volumes:
+  static-content:
